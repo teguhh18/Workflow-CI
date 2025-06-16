@@ -18,9 +18,12 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
-        python-version: "3.12.7" # Pastikan versi ini sama dengan di conda.yaml
+        python-version: "3.12.7" 
+        
+    # --- LANGKAH TAMBAHAN YANG KRUSIAL ---
+    - name: Install MLflow in base environment
+      run: pip install mlflow==2.19.0
         
     - name: Run MLflow Project
-      # Perintah ini secara otomatis akan menggunakan Conda untuk membuat 
-      # environment dari 'conda.yaml' sebelum menjalankan skrip.
+      # Sekarang perintah 'mlflow' sudah tersedia dan bisa digunakan
       run: mlflow run MLProject
