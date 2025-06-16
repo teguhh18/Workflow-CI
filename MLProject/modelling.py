@@ -4,12 +4,21 @@ import mlflow.sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import os # <-- Tambahkan import os
 
 # Aktifkan autologging
 mlflow.sklearn.autolog()
 
-# Load data
-df = pd.read_csv("heart-disease-uci_preprocessing.csv")
+# --- Ganti bagian pemuatan data ---
+
+# Menentukan path secara dinamis
+# Ini membuat skrip dapat menemukan file CSV tidak peduli dari mana ia dijalankan
+script_dir = os.path.dirname(__file__)
+file_path = os.path.join(script_dir, 'heart-disease-uci_preprocessing.csv')
+df = pd.read_csv(file_path)
+
+# --- Akhir dari bagian penggantian ---
+
 
 # Pisahkan fitur dan target
 X = df.drop("num", axis=1)
