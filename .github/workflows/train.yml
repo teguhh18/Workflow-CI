@@ -17,14 +17,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
         pip install --upgrade pip
         pip install pandas scikit-learn mlflow==2.19.0
 
-    - name: Run MLflow Project
+    - name: Run MLflow Project (no conda)
       run: |
         cd MLProject
-        mlflow run .
+        mlflow run . --no-conda
