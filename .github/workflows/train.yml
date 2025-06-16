@@ -9,23 +9,18 @@ on:
 jobs:
   train:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Set up Conda
+      uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: '3.12'
-
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip uninstall -y mlflow-skinny || true
-        pip install mlflow==2.19.0 pandas scikit-learn
-
-    - name: Run MLflow Project (no conda)
-      run: |
-        cd MLProject
-        mlflow run . --no-conda
+        auto-update-conda: true
+        python-version: "3.12.7" # Pastikan versi ini sama dengan di conda.yaml
+        
+    - name: Run MLflow Project
+      # Perintah ini secara otomatis akan menggunakan Conda untuk membuat 
+      # environment dari 'conda.yaml' sebelum menjalankan skrip.
+      run: mlflow run MLProject
