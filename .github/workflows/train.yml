@@ -20,10 +20,12 @@ jobs:
         auto-update-conda: true
         python-version: "3.12.7" 
         
-    # --- LANGKAH TAMBAHAN YANG KRUSIAL ---
     - name: Install MLflow in base environment
       run: pip install mlflow==2.19.0
         
     - name: Run MLflow Project
-      # Sekarang perintah 'mlflow' sudah tersedia dan bisa digunakan
+      # Menambahkan shell: bash -el {0} adalah kuncinya.
+      # Ini memastikan langkah ini dijalankan dalam shell yang sudah 
+      # "sadar" akan lingkungan Conda.
+      shell: bash -el {0}
       run: mlflow run MLProject
