@@ -22,7 +22,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install pandas scikit-learn mlflow==2.19.0
+        pip uninstall -y mlflow-skinny || true
+        pip install mlflow==2.19.0 pandas scikit-learn
 
     - name: Run MLflow Project (no conda)
       run: |
